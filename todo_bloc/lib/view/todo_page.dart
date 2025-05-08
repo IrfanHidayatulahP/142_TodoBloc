@@ -9,7 +9,7 @@ class TodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _key = GlobalKey<FormState>();
-    final _titleController = TextEditingController();
+    final _controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -53,10 +53,31 @@ class TodoPage extends StatelessWidget {
                             );
                           }
                         });
-                      }, child: null,
+                      }, child: const Text('Select Date'),
                     )
                   )
                 ],
+              ),
+              Form(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: _controller,
+                        decoration: const InputDecoration(
+                          labelText: 'Todo',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a todo';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                )
               )
             ],
           ),
