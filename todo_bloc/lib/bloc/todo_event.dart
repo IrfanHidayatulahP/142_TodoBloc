@@ -5,10 +5,12 @@ sealed class TodoEvent {}
 final class TodoBlocEventAdd extends TodoEvent {
   final String title;
   final DateTime date;
+  bool isCompleted = false;
 
   TodoBlocEventAdd({
     required this.title,
     required this.date,
+    this.isCompleted = false,
     });
 }
 
