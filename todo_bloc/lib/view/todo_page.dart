@@ -23,12 +23,12 @@ class TodoPage extends StatelessWidget {
                       const Text('Select Date'),
                       BlocBuilder<TodoBloc, TodoState>(
                         builder: (context, state) {
-                          if (state is TodoLoaded) { 
-                            if (state.selectedDate != null) {
-                              return Text(
-                                '${state.selectedDate!.day}/${state.selectedDate!.month}/${state.selectedDate!.year}',
-                              );
-                            }
+                          if (state is TodoLoaded && state.selectedDate != null) {
+                            final date = state.selectedDate!;
+                            return Text(
+                              '${date.day}/${date.month}/${date.year}',
+                              style: const TextStyle(fontSize: 16),
+                            );
                           }
                           return const Text('No date selected');
                         },
@@ -98,7 +98,7 @@ class TodoPage extends StatelessWidget {
                 child: BlocBuilder<TodoBloc, TodoState>(
                   builder: (context, state) {
                     if (state is TodoLoaded) {
-                      return const Center(child: CircularProgressIndicator(),);
+                      return const Center(child: CircularProgressIndicator());
                     } else if (state is TodoLoaded) {
                       if (state.todos.isEmpty) {
                         return const Center(child: Text('Todo list is Empty'));

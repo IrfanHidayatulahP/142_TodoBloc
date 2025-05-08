@@ -5,7 +5,7 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-  TodoBloc() : super(TodoInitial()) {
+  TodoBloc() : super(TodoLoaded(todos: [], selectedDate: null)) {
     on<TodoBlocEventAdd>((event, emit) {
       final currentState = state;
       if (currentState is TodoLoaded) {
