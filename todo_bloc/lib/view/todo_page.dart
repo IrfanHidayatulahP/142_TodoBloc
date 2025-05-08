@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_bloc/bloc/todo_bloc.dart';
 
@@ -8,8 +7,8 @@ class TodoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _key = GlobalKey<FormState>();
-    final _controller = TextEditingController();
+    final key = GlobalKey<FormState>();
+    final controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -24,13 +23,11 @@ class TodoPage extends StatelessWidget {
                       const Text('Select Date'),
                       BlocBuilder<TodoBloc, TodoState>(
                         builder: (context, state) {
-                          if (state is TodoLoaded) {
-                            if (state is TodoLoaded) {
-                              if (state.selectedDate != null) {
-                                return Text(
-                                  '${state.selectedDate!.day}/${state.selectedDate!.month}/${state.selectedDate!.year}',
-                                );
-                              }
+                          if (state is TodoLoaded) { 
+                            if (state.selectedDate != null) {
+                              return Text(
+                                '${state.selectedDate!.day}/${state.selectedDate!.month}/${state.selectedDate!.year}',
+                              );
                             }
                           }
                           return const Text('No date selected');
@@ -59,11 +56,12 @@ class TodoPage extends StatelessWidget {
                 ],
               ),
               Form(
+                key: key,
                 child: Row(
                   children: [
                     Expanded(
                       child: TextFormField(
-                        controller: _controller,
+                        controller: controller,
                         decoration: const InputDecoration(
                           labelText: 'Todo',
                           border: OutlineInputBorder(),
@@ -78,12 +76,12 @@ class TodoPage extends StatelessWidget {
                     ),
                     FilledButton(
                       onPressed: () {
-                        if (_key.currentState!.validate()) {
+                        if (key.currentState!.validate()) {
                           final selectedDate = context.read<TodoBloc>().state;
                           if (selectedDate is TodoLoaded) {
                             context.read<TodoBloc>().add(
                               TodoBlocEventAdd(
-                                title: _controller.text, 
+                                title: controller.text, 
                                 date: selectedDate.selectedDate!,
                               ),
                             );
