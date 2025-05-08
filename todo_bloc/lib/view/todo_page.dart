@@ -160,8 +160,13 @@ class TodoPage extends StatelessWidget {
                           );
                         },
                       );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          'No todos available',
+                        ),
+                      );
                     }
-                    return const Center(child: Text('Unexpected state'));
                   },
                 ),
               )
