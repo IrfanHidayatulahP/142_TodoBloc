@@ -94,6 +94,52 @@ class TodoPage extends StatelessWidget {
                     )
                   ],
                 )
+              ),
+              const SizedBox(height: 16.0),
+              Expanded(
+                child: BlocBuilder<TodoBloc, TodoState>(
+                  builder: (context, state) {
+                    if (state is TodoLoaded) {
+                      return const Center(child: CircularProgressIndicator(),);
+                    } else if (state is TodoLoaded) {
+                      if (state.todos.isEmpty) {
+                        return const Center(child: Text('Todo list is Empty'));
+                      }
+                      return ListView.builder(
+                        itemCount: state.todos.length,
+                        itemBuilder: (context, index) {
+                          final todo = state.todos[index];
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 8.0),
+                            padding: const EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              color: Colors.blue[50],
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      todo.title,
+                                      style: const TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    return const Center(child: Text('Unexpected state'));
+                  },
+                ),
               )
             ],
           ),
