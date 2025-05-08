@@ -128,6 +128,14 @@ class TodoPage extends StatelessWidget {
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                    ),
+                                    const SizedBox(height: 4.0),
+                                    Text(
+                                      '${todo.date.day}/${todo.date.month}/${todo.date.year}',
+                                      style: const TextStyle(
+                                        fontSize: 14.0,
+                                        color: Colors.grey,
+                                      ),
                                     )
                                   ],
                                 )
