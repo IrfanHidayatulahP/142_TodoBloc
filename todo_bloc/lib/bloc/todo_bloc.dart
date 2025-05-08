@@ -46,7 +46,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           updatedTodos[event.index] = Todo(
             title: updatedTodos[event.index].title,
             date: updatedTodos[event.index].date,
-            isCompleted: updatedTodos[event.index].isCompleted == true,
+            isCompleted: !updatedTodos[event.index].isCompleted == true,
           );
         }
         emit(

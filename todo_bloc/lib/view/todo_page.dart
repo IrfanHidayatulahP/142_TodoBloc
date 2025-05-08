@@ -138,9 +138,11 @@ class TodoPage extends StatelessWidget {
                                     const SizedBox(height: 4.0),
                                     Text(
                                       todo.isCompleted ? 'Completed' : 'Not Completed',
-                                      style: const TextStyle(
-                                        fontSize: 14.0,
-                                        color: Colors.grey,
+                                      style: TextStyle(
+                                        color: 
+                                        todo.isCompleted 
+                                        ? Colors.green 
+                                        : Colors.red,
                                       ),
                                     ),
                                   ],
